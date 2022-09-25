@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://cluster0:12345shre@cluster0.cwu8nky.mongodb.net/todolistDB");
+mongoose.connect("mongodb+srv://admin-shreyansh:12345shre@cluster0.tmyrrzl.mongodb.net/todolistDB");
 
 const itemSchema = {
   name: String,
@@ -125,7 +125,7 @@ app.post("/delete",function(req,res){
     if(!err){
       res.redirect("/"+ listName);
     }
-  })
+  });
 
 }
 
@@ -138,6 +138,13 @@ app.get("/about", function(req, res){
   res.render("about");
 });
 
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+
+let port = process.env.PORT;   //heroku's port
+if (port == null || port == "") {
+  port = 3000;
+}
+
+
+app.listen(port, function() {
+  console.log("Server started succesfully");
 });
